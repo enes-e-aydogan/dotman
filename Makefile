@@ -14,6 +14,7 @@ SECURITY_FLAGS := -D_FORTIFY_SOURCE=2 -fstack-protector-strong -fstack-clash-pro
 DEBUG_FLAGS := -O1 -DDEBUG -fsanitize=address -fsanitize=undefined
 
 RELEASE_FLAGS := -O3 -DNDEBUG
+SUBMODULES := -Iexternal/c-vector
 
 SRCDIR := src
 INCDIR := include
@@ -25,6 +26,7 @@ OBJECTS := $(SOURCES:$(SRCDIR)/%.c=$(BUILDDIR)/%.o)
 TARGET := $(BUILDDIR)/dotman
 
 CFLAGS += $(SECURITY_FLAGS)
+CFLAGS += $(SUBMODULES)
 
 all: debug
 
