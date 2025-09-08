@@ -1,0 +1,3 @@
+[submodule "external/c-vector"]
+	path = external/c-vector
+	url = git@github.com:enes-e-aydogan/c-vector
