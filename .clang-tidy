@@ -3,8 +3,10 @@ Checks: >
   bugprone-*,
   performance-*,
   readability-*,
+  portability-*,
   modernize-*,
   -modernize-use-trailing-return-type
+  -readability-magic-numbers,
 
 WarningsAsErrors: '*'
 HeaderFilterRegex: '.*'
