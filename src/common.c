@@ -8,3 +8,16 @@ scope_type_t scope_str_to_enum(const char* scp) {
   }
   return SCOPE_UNKNOWN;
 }
+
+const char* scope_enum_to_str(scope_type_t scope) {
+  switch (scope) {
+    case SCOPE_DOT:
+      return "dot";
+    case SCOPE_DEP:
+      return "dep";
+    case SCOPE_UNKNOWN:
+      return "unknown";
+    case SCOPE_NONE:
+      return "none";
+  }
+}

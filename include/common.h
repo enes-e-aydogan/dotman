@@ -13,6 +13,7 @@ typedef enum {
 } scope_type_t;
 
 scope_type_t scope_str_to_enum(const char* scp);
+const char*  scope_enum_to_str(scope_type_t scope);
 
 // Vectors
 DEFINE_STR_VECTOR
