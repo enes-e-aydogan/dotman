@@ -6,13 +6,13 @@
 #define DOTMAN_VERSION "v0.1.0"
 
 typedef enum {
-  SCP_NONE = 0,
-  SCP_DOT,
-  SCP_DEP,
-  SCP_UNKNOWN,
-} scp_type_t;
+  SCOPE_NONE = 0,
+  SCOPE_DOT,
+  SCOPE_DEP,
+  SCOPE_UNKNOWN,
+} scope_type_t;
 
-scp_type_t scp_str_to_enum(const char* scp);
+scope_type_t scope_str_to_enum(const char* scp);
 
 // Vectors
 DEFINE_STR_VECTOR

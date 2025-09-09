@@ -7,9 +7,9 @@
 #include "cvector.h"
 
 typedef struct {
-  scp_type_t scp;
-  str_vec_t  fields;
-  str_vec_t  array;
+  scope_type_t scope;
+  str_vec_t    fields;
+  str_vec_t    array;
 } config_line_t;
 
 DEFINE_VECTOR(config_line_t, config_line)
