@@ -46,7 +46,6 @@ int parse_file(const char* filename, conf_line_vec_t* conf_lines) {
   if (read != file_size) {
     LOG_ERROR("Failed to read file");
     free(buffer);
-    fclose(file_p);
     return EXIT_FAILURE;
   }
 
