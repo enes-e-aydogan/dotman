@@ -12,10 +12,10 @@ typedef struct {
   str_vec_t  array;
 } config_line_t;
 
-DEFINE_VECTOR(config_line_t, conf_line)
+DEFINE_VECTOR(config_line_t, config_line)
 
 char* trim(char* str);
-int   parse_line(config_line_t* conf_line, const char* line);
-int   parse_file(const char* filename, conf_line_vec_t* conf_line_vec);
+int   parse_line(config_line_vec_t* config_line_vec, const char* token);
+int   parse_file(const char* filename, config_line_vec_t* config_line_vec);
 
 #endif
