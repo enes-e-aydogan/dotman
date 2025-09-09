@@ -19,6 +19,7 @@ char* trim(char* str) {
 }
 
 int parse_file(const char* filename, conf_line_vec_t* conf_lines) {
+int parse_file(const char* filename, conf_line_vec_t* conf_line_vec) {
   /*
    * read file,
    * pass to parse_line function with strtok
@@ -56,20 +57,14 @@ int parse_file(const char* filename, conf_line_vec_t* conf_lines) {
       continue;
     }
 
-    config_line_t line;
     token = trim(token);
 
-    if (parse_line(&line, token)) {
+    if (parse_line(conf_line_vec, token)) {
       LOG_ERROR("Failed to parse line");
       free(buffer);
       return EXIT_FAILURE;
     }
 
-    if (conf_line_vec_push(conf_lines, line)) {
-      LOG_ERROR("Failed to push line into vector");
-      free(buffer);
-      return -1;
-    }
     token = strtok(NULL, "\n");
   }
 

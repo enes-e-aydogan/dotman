@@ -16,6 +16,6 @@ DEFINE_VECTOR(config_line_t, conf_line)
 
 char* trim(char* str);
 int   parse_line(config_line_t* conf_line, const char* line);
-int   parse_file(const char* file, conf_line_vec_t* conf_lines);
+int   parse_file(const char* filename, conf_line_vec_t* conf_line_vec);
 
 #endif
