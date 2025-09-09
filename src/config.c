@@ -96,9 +96,9 @@ int parse_file(const char* filename, config_line_vec_t** config_line_vec) {
     return EXIT_FAILURE;
   }
 
-  fseek(file_p, 0, SEEK_END);
+  fseek(file_p, (size_t) 0, SEEK_END);
   size_t file_size = ftell(file_p);
-  fseek(file_p, 0, SEEK_SET);
+  fseek(file_p, (size_t) 0, SEEK_SET);
 
   char* buffer = malloc(file_size + 1);
   if (!buffer) {
@@ -107,7 +107,7 @@ int parse_file(const char* filename, config_line_vec_t** config_line_vec) {
     return EXIT_FAILURE;
   }
 
-  size_t read  = fread(buffer, 1, file_size, file_p);
+  size_t read  = fread(buffer, (size_t) 1, file_size, file_p);
   buffer[read] = '\0';
   fclose(file_p);
 
