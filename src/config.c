@@ -56,7 +56,9 @@ int parse_file(const char* filename, conf_line_vec_t* conf_lines) {
       token = strtok(NULL, "\n");
       continue;
     }
+
     config_line_t line;
+    token = trim(token);
 
     if (parse_line(&line, token)) {
       LOG_ERROR("Failed to parse line");
