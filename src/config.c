@@ -1,6 +1,7 @@
 #include "config.h"
 
 #include <ctype.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -18,14 +19,51 @@ char* trim(char* str) {
   return str;
 }
 
-int parse_file(const char* filename, conf_line_vec_t* conf_lines) {
-int parse_file(const char* filename, conf_line_vec_t* conf_line_vec) {
-int parse_file(const char* filename, config_line_vec_t* config_line_vec) {
-  /*
-   * read file,
-   * pass to parse_line function with strtok
-   * */
+int extract_array(config_line_t* config_line, char* data) {
+  return EXIT_SUCCESS;
+}
 
+int parse_line(config_line_vec_t* config_line_vec, char* line) {
+  config_line_t config_line;
+  bool          scope_extracted = false;
+  char*         data            = strtok(line, ":");
+  while (data != NULL) {
+    data = trim(data);
+    if (*data == '\0') {
+      LOG_ERROR("Empty field in the config file.");
+      return EXIT_FAILURE;
+    }
+
+    if (!scope_extracted) {
+      config_line.scope = scope_str_to_enum(data);
+      if (config_line.scope == SCOPE_UNKNOWN) {
+        LOG_ERROR("Unknown scope name!");
+        return EXIT_FAILURE;
+      }
+      scope_extracted = true;
+      data            = strtok(NULL, ":");
+      continue;
+    }
+
+    if ((strchr(data, ',')) != NULL) {
+      if (extract_array(&config_line, data)) {
+        LOG_ERROR("Failed to extract array");
+        return EXIT_FAILURE;
+      }
+      data = strtok(NULL, ":");
+      continue;
+    }
+
+    str_vec_push(&config_line.fields, data);
+    data = strtok(NULL, ":");
+  }
+
+  config_line_vec_push(config_line_vec, config_line);
+
+  return EXIT_SUCCESS;
+}
+
+int parse_file(const char* filename, config_line_vec_t* config_line_vec) {
   FILE* file_p = fopen(filename, "rb");
   if (!file_p) {
     LOG_ERROR("Failed to open file");
@@ -52,6 +90,7 @@ int parse_file(const char* filename, config_line_vec_t* config_line_vec) {
   }
 
   char* token = strtok(buffer, "\n");
+
   while (token != NULL) {
     if (*token == '\0') {
       token = strtok(NULL, "\n");

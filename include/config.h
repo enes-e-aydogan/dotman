@@ -15,7 +15,8 @@ typedef struct {
 DEFINE_VECTOR(config_line_t, config_line)
 
 char* trim(char* str);
-int   parse_line(config_line_vec_t* config_line_vec, const char* token);
+int   extract_array(config_line_t* config_line, char* data);
+int   parse_line(config_line_vec_t* config_line_vec, char* line);
 int   parse_file(const char* filename, config_line_vec_t* config_line_vec);
 
 #endif
